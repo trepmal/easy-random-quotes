@@ -4,16 +4,16 @@
  * Plugin URI: http://trepmal.com/plugins/easy-random-quotes/
  * Description: Insert quotes and pull them randomly into your pages and posts (via shortcodes) or your template (via template tags).
  * Author: Kailey Lampert
- * Version: 1.8
+ * Version: 2.0-dev
  * Author URI: http://kaileylampert.com/
  * License: GPLv2 or later
  * TextDomain: easy-random-quotes
  * DomainPath: lang/
  */
 
-$kl_easyrandomquotes = new kl_easyrandomquotes();
+$easy_random_quotes = new Easy_Random_Quotes();
 
-class kl_easyrandomquotes {
+class Easy_Random_Quotes {
 
 	/**
 	 *
@@ -24,7 +24,7 @@ class kl_easyrandomquotes {
 	 *
 	 */
 	function __construct() {
-		add_action( 'widgets_init',    array( $this, 'kl_easyrandomquotes_load_widget' ) );
+		add_action( 'widgets_init',    array( $this, 'widgets_init' ) );
 
 		add_action( 'admin_menu',      array( $this, 'menu' ) );
 		add_action( 'contextual_help', array( $this, 'help'), 10, 3 );
@@ -35,8 +35,8 @@ class kl_easyrandomquotes {
 	/**
 	 *
 	 */
-	function kl_easyrandomquotes_load_widget() {
-		register_widget( 'kl_easyrandomquotes_widget' );
+	function widgets_init() {
+		register_widget( 'Easy_Random_Quotes_Widget' );
 	}
 
 	/**
@@ -271,18 +271,18 @@ function erq_shortcode( $atts=array() ) {
 	}
 }
 
-class kl_easyrandomquotes_widget extends WP_Widget {
+class Easy_Random_Quotes_Widget extends WP_Widget {
 
 	/**
 	 *
 	 */
 	function __construct() {
 		$widget_ops = array(
-			'classname'   => 'kl-erq',
+			'classname'   => 'easy-random-quotes',
 			'description' => __( 'Displays random quotes', 'easy-random-quotes' )
 		);
 		$control_ops = array();
-		parent::__construct( 'kl-erq', __( 'Easy Random Quotes', 'easy-random-quotes' ), $widget_ops, $control_ops );
+		parent::__construct( 'easy-random-quotes', __( 'Easy Random Quotes', 'easy-random-quotes' ), $widget_ops, $control_ops );
 	}
 
 	/**
